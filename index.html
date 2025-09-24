@@ -3,168 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>メールリンク & QRコード生成ツール</title>
+    <title>フォトコンテスト応募</title>
     <style>
-        /* ブランドカラー定義 */
-        :root {
-            --bg-color: #e0e5f3;
-            --primary-accent-color: #018bee;
-            --card-bg-color: #ffffff;
-            --text-color: #093065;
-            --border-color: #9b9b9b;
-        }
-
-        /* 全体のスタイル */
+        /* ページ全体のスタイル */
         body {
             margin: 0;
-            padding: 2em 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e5f3;
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            text-align: center;
         }
 
-        /* コンテンツを中央に配置するコンテナ */
+        /* コンテンツをまとめるボックス */
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: var(--card-bg-color);
             padding: 2em;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 1.5em;
-            color: var(--text-color);
-        }
-
-        /* フォーム要素のスタイル */
-        label {
-            display: block;
-            margin-bottom: 0.5em;
-            font-weight: bold;
-        }
-
-        input[type="email"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 1.5em;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        input[type="email"]:focus,
-        input[type="text"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-accent-color);
-            box-shadow: 0 0 5px rgba(1, 139, 238, 0.5);
-        }
-
-        /* ボタンのスタイル */
-        button {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--card-bg-color);
-            background-color: var(--primary-accent-color);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0073cc; /* 少し濃い青 */
-        }
-
-        /* 結果表示エリアのスタイル */
-        #result {
-            margin-top: 2em;
-            padding: 1.5em;
-            background-color: #f7f9fc;
-            border-radius: 5px;
-            word-wrap: break-word;
-            border: 1px solid var(--bg-color);
-        }
-
-        #result h3 {
-            margin-top: 0;
-        }
-
-        #mailLink {
-            color: var(--primary-accent-color);
-            text-decoration: none;
+            color: #093065;
         }
         
-        #mailLink:hover {
-            text-decoration: underline;
+        p {
+            color: #093065;
+            margin-bottom: 2em;
         }
 
-        #qrcode {
-            margin-top: 1em;
-            display: flex;
-            justify-content: center;
+        /* メール起動ボタンのスタイル */
+        .mail-button {
+            display: inline-block;
+            padding: 18px 36px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #018bee;
+            border-radius: 8px;
+            text-decoration: none; /* リンクの下線を消す */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .mail-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>メールリンク & QRコード生成</h1>
-
-        <div>
-            <label for="to">宛先 (To)</label>
-            <input type="email" id="to" placeholder="test@example.com" value="group-photocontest01@ichimaru-grp.jp">
-        </div>
-        <div>
-            <label for="cc">CC</label>
-            <input type="email" id="cc" placeholder="cc@example.com">
-        </div>
-        <div>
-            <label for="bcc">BCC</label>
-            <input type="email" id="bcc" placeholder="bcc@example.com">
-        </div>
-        <div>
-            <label for="subject">件名</label>
-            <input type="text" id="subject" placeholder="お問い合わせ" value="第一回 市丸グループ事業所フォトコンテスト応募">
-        </div>
-        <div>
-            <label for="body">本文</label>
-            <textarea id="body" rows="12" placeholder="こちらに内容を入力してください。">以下の項目に記入し、作品写真を添付して送信ください。
-
---------------------
-
-■氏名：
-
-■所属：
-
-■従業員（社員）番号：
-
-■写真のタイトルやコメント（任意）： 
-
---------------------
-※ファイルサイズオーバー時は直接データを本社まで持参してください。</textarea>
-        </div>
-
-        <button id="generateBtn">生成する</button>
-
-        <div id="result" style="display:none;">
-            <h3>生成結果</h3>
-            <p><strong>メールリンク:</strong></p>
-            <a id="mailLink" href="#"></a>
-            <p><strong>QRコード:</strong></p>
-            <div id="qrcode"></div>
-        </div>
-    </div><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <script src="script.js"></script>
+        <h1>フォトコンテスト応募</h1>
+        <p>ボタンをタップして、メールアプリからご応募ください。</p>
+        
+        <a class="mail-button" href="mailto:group-photocontest01@ichimaru-grp.jp?subject=%E7%AC%AC%E4%B8%80%E5%9B%9E%20%E5%B8%82%E4%B8%B8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E4%BA%8B%E6%A5%AD%E6%89%80%E3%83%95%E3%82%A9%E3%83%88%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88%E5%BF%9C%E5%8B%9F&body=%E4%BB%A5%E4%B8%8B%E3%81%AE%E9%A0%85%E7%9B%AE%E3%81%AB%E8%A8%98%E5%85%A5%E3%81%97%E3%80%81%E4%BD%9C%E5%93%81%E5%86%99%E7%9C%9F%E3%82%92%E6%B7%BB%E4%BB%98%E3%81%97%E3%81%A6%E9%80%81%E4%BF%A1%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82%0A%0A--------------------%0A%0A%E2%96%A0%E6%B0%8F%E5%90%8D%EF%BC%9A%0A%0A%E2%96%A0%E6%89%80%E5%B1%9E%EF%BC%9A%0A%0A%E2%96%A0%E5%BE%93%E6%A5%AD%E5%93%A1%EF%BC%88%E7%A4%BE%E5%93%A1%EF%BC%89%E7%95%AA%E5%8F%B7%EF%BC%9A%0A%0A%E2%96%A0%E5%86%99%E7%9C%9F%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%E3%82%84%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%EF%BC%88%E4%BB%BB%E6%84%8F%EF%BC%89%EF%BC%9A%C2%A0%0A%0A--------------------%0A%E2%80%BB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E6%99%82%E3%81%AF%E7%9B%B4%E6%8E%A5%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9C%AC%E7%A4%BE%E3%81%BE%E3%81%A7%E6%8C%81%E5%8F%82%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82">
+            メールで応募する
+        </a>
+    </div>
 
 </body>
 </html>
