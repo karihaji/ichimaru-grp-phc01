@@ -41,6 +41,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             z-index: 2;
+            position: relative; /* ボタンを配置する基準点 */
         }
         h1 { color: #093065; font-size: 24px; }
         .description { color: #093065; margin-bottom: 2em; font-size: 16px; line-height: 1.6; }
@@ -69,8 +70,7 @@
             margin-top: 1.5em;
             border-top: 1px solid #e0e5f3;
             padding-top: 1em;
-            /* ▼ 変更点: 下部に余白を追加してページ全体の高さを確保 */
-            margin-bottom: 200px;
+            margin-bottom: 0; /* 余白をリセット */
         }
         summary { cursor: pointer; font-weight: bold; color: #093065; }
         summary::marker { color: #018bee; }
@@ -79,7 +79,8 @@
         .copy-box { padding: 10px; background-color: #fff; border: 1px solid #e0e5f3; border-radius: 5px; margin-top: 5px; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; user-select: all; }
 
         .scroll-top-btn {
-            position: fixed;
+            /* ▼ 変更点: positionをabsoluteに変更 */
+            position: absolute;
             bottom: 25px;
             right: 25px;
             width: 60px;
@@ -159,11 +160,11 @@
 ※ファイルサイズオーバー時は直接データを本社まで持参してください。</div>
             </div>
         </details>
-    </div>
 
-    <a href="#" id="scrollTopBtn" class="scroll-top-btn">
-        <img src="./backtotop.png" alt="ページトップへ戻る">
-    </a>
+        <a href="#" id="scrollTopBtn" class="scroll-top-btn">
+            <img src="./backtotop.png" alt="ページトップへ戻る">
+        </a>
+    </div>
 
     <script>
         const scrollTopBtn = document.getElementById('scrollTopBtn');
