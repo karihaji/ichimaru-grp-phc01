@@ -29,12 +29,13 @@
         .background-image-holder {
             width: 540px;
             height: 765px;
-            /* ▼ ファイル名を変更 */
             background-image: url('./1stIchimaruphcs.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0.3;
+            /* ▼ 変更点: 重なり順を明示的に指定 (階層1) */
+            z-index: 1;
         }
 
         /* コンテンツをまとめるカード */
@@ -45,6 +46,8 @@
             padding: 2em;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            /* ▼ 変更点: 重なり順を明示的に指定 (階層2) */
+            z-index: 2;
         }
 
         /* 以下、カード内のスタイル (変更なし) */
