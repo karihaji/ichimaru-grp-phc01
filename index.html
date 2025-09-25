@@ -41,7 +41,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             z-index: 2;
-            position: relative; /* ボタンを配置する基準点 */
+            position: relative;
         }
         h1 { color: #093065; font-size: 24px; }
         .description { color: #093065; margin-bottom: 2em; font-size: 16px; line-height: 1.6; }
@@ -70,16 +70,14 @@
             margin-top: 1.5em;
             border-top: 1px solid #e0e5f3;
             padding-top: 1em;
-            margin-bottom: 0; /* 余白をリセット */
+            margin-bottom: 0;
         }
         summary { cursor: pointer; font-weight: bold; color: #093065; }
         summary::marker { color: #018bee; }
         .help-content { margin-top: 1em; padding: 1em; background-color: #f7f9fc; border-radius: 5px; text-align: left; line-height: 1.7; }
         .help-content label { font-weight: bold; display: block; margin-top: 1em; }
         .copy-box { padding: 10px; background-color: #fff; border: 1px solid #e0e5f3; border-radius: 5px; margin-top: 5px; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; user-select: all; }
-
         .scroll-top-btn {
-            /* ▼ 変更点: positionをabsoluteに変更 */
             position: absolute;
             bottom: 25px;
             right: 25px;
@@ -102,6 +100,38 @@
         .scroll-top-btn:hover {
             opacity: 1;
         }
+
+        /* ▼▼▼ スマートフォン向けのレスポンシブ対応 ▼▼▼ */
+        @media (max-width: 600px) {
+            body {
+                padding: 1em; /* ページの左右余白を狭くする */
+                display: block; /* 中央配置のgridを解除 */
+            }
+
+            /* スマホでは背景画像を非表示にして見やすくする */
+            .background-image-holder {
+                display: none;
+            }
+
+            .container {
+                padding: 1.5em; /* カード内の余白を狭くする */
+            }
+
+            h1 {
+                font-size: 22px; /* タイトルを少し小さく */
+            }
+
+            /* トップに戻るボタンは画面右下に固定する */
+            .scroll-top-btn {
+                position: fixed;
+                width: 50px;
+                height: 50px;
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+        /* ▲▲▲ スマートフォン向けのレスポンシブ対応 ▲▲▲ */
+
     </style>
 </head>
 <body>
@@ -160,7 +190,6 @@
 ※ファイルサイズオーバー時は直接データを本社まで持参してください。</div>
             </div>
         </details>
-
         <a href="#" id="scrollTopBtn" class="scroll-top-btn">
             <img src="./backtotop.png" alt="ページトップへ戻る">
         </a>
