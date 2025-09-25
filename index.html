@@ -9,7 +9,6 @@
         body {
             margin: 0;
             padding: 2em 1em;
-            /* ▼ CSS Gridを使って要素を中央に重ねて配置 */
             display: grid;
             place-items: center;
             min-height: 100vh;
@@ -19,36 +18,36 @@
             box-sizing: border-box;
         }
 
-        /* ▼ 重ねる要素を同じグリッドセルに配置 */
+        /* 重ねる要素を同じグリッドセルに配置 */
         .background-image-holder,
         .container {
             grid-column: 1 / 1;
             grid-row: 1 / 1;
         }
 
-        /* ▼ 中央に配置する半透明の背景画像ホルダー */
+        /* 中央に配置する半透明の背景画像ホルダー */
         .background-image-holder {
-            width: 540px;  /* カードより少し大きく */
-            height: 765px; /* カードより少し大きく */
-            background-image: url('./1stIchimaruphc.jpg');
+            width: 540px;
+            height: 765px;
+            /* ▼ ファイル名を変更 */
+            background-image: url('./1stIchimaruphcs.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.3; /* 画像全体の透明度を調整 */
+            opacity: 0.3;
         }
 
         /* コンテンツをまとめるカード */
         .container {
             max-width: 500px;
             width: 100%;
-            /* ▼ 背景を少しだけ透明にして、下の画像がかすかに透けるように */
             background-color: rgba(255, 255, 255, 0.97);
             padding: 2em;
             border-radius: 10px;
-            box-shadow: 0 4px R(20) rgba(0, 0, 0, 0.15); /* 影を少し強調 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* ▼ 以下、カード内のスタイル (変更なし) */
+        /* 以下、カード内のスタイル (変更なし) */
         h1 {
             color: #093065;
             font-size: 24px;
