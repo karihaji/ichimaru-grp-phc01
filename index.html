@@ -6,7 +6,6 @@
     <title>第一回市丸グループ事業所フォトコンテスト</title>
     <style>
         html {
-            /* ▼ スムーズスクロールを有効にする */
             scroll-behavior: smooth;
         }
         body {
@@ -66,14 +65,19 @@
         .flyer-link:hover { text-decoration: underline; }
         .notes { font-size: 14px; text-align: left; color: #555; padding: 0; list-style-type: none; }
         .notes li { margin-bottom: 1em; }
-        details { margin-top: 1.5em; border-top: 1px solid #e0e5f3; padding-top: 1em; }
+        details {
+            margin-top: 1.5em;
+            border-top: 1px solid #e0e5f3;
+            padding-top: 1em;
+            /* ▼ 変更点: 下部に余白を追加してページ全体の高さを確保 */
+            margin-bottom: 200px;
+        }
         summary { cursor: pointer; font-weight: bold; color: #093065; }
         summary::marker { color: #018bee; }
         .help-content { margin-top: 1em; padding: 1em; background-color: #f7f9fc; border-radius: 5px; text-align: left; line-height: 1.7; }
         .help-content label { font-weight: bold; display: block; margin-top: 1em; }
         .copy-box { padding: 10px; background-color: #fff; border: 1px solid #e0e5f3; border-radius: 5px; margin-top: 5px; font-family: monospace; white-space: pre-wrap; word-wrap: break-word; user-select: all; }
 
-        /* ▼ トップへ戻るボタンのスタイルを追加 */
         .scroll-top-btn {
             position: fixed;
             bottom: 25px;
@@ -92,10 +96,10 @@
         }
         .scroll-top-btn.show {
             visibility: visible;
-            opacity: 0.8; /* 少しだけ透明にする */
+            opacity: 0.8;
         }
         .scroll-top-btn:hover {
-            opacity: 1; /* ホバーで不透明に */
+            opacity: 1;
         }
     </style>
 </head>
@@ -164,7 +168,6 @@
     <script>
         const scrollTopBtn = document.getElementById('scrollTopBtn');
 
-        // ある程度スクロールしたらボタンを表示
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 scrollTopBtn.classList.add('show');
@@ -173,9 +176,8 @@
             }
         });
 
-        // ボタンをクリックしたらトップへ戻る
         scrollTopBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // aタグのデフォルトの挙動をキャンセル
+            e.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
